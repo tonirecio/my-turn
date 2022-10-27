@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+// import logo from './logo.svg'
+import { useState } from 'react'
+import './App.css'
+import { Turn } from './components/Turn.js'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = ({ initialTurns = [] }) => {
+  const [turns, setTurns] = useState(initialTurns)
+
+  if (typeof (turns) === 'undefined' || turns.length === 0) {
+    return (<p>No turns</p>)
+  } else {
+    return (
+      <div>
+        <h1>Turns</h1>
+        <ol>
+          {turns.map((turn) => (
+            <Turn
+              key={turn.id}
+              id={turn.id}
+              requester={turn.requester}
+              request={turn.request}
+              isUrgent={turn.isUrgent}
+            />
+          )
+          )}
+        </ol>
+      </div>
+    )
+  }
 }
 
-export default App;
+export default App
