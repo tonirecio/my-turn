@@ -1,10 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
-import App from './App'
-import reportWebVitals from './reportWebVitals'
+import App from './components/App'
 
-const turns = [
+const turnsData = [
   {
     id: 1,
     requester: 'John Doe',
@@ -15,17 +14,15 @@ const turns = [
     id: 2,
     requester: 'Jane Doe',
     request: 'I need support about my life'
+  },
+  {
+    id: 3,
+    requester: 'Pepito',
+    request: 'I need support about my life'
   }
 ]
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
-  <React.StrictMode>
-    <App turns={turns} />
-  </React.StrictMode>
+  <App turns={turnsData} />
 )
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals()
