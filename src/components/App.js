@@ -3,11 +3,13 @@
 import './App.css'
 import { Turn as Pepe } from './Turn'
 import { TurnForm } from './TurnForm'
+import { Counter } from './Counter'
 
 const App = ({ turns }) => {
   return (
     <div>
       <h1>Hello My-Turn</h1>
+      <Counter />
       {turns.length === 0
         ? (<p>NO TURNS REQUESTED</p>)
         : (
