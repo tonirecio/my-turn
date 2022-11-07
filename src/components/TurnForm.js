@@ -1,48 +1,55 @@
 import { useState, useEffect } from 'react'
 
-export const TurnForm = ({ turns }) => {
-  const [formTurns, setFormTurns] = useState()
-  const [requester, setRequester] = useState('anonymous')
+export const TurnForm = ({ onNewTurn }) => {
+  // const [formTurns, setFormTurns] = useState()
+  // const [requester, setRequester] = useState('anonymous')
   const [request, setRequest] = useState('just talk')
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    // setFormTurns(turns)
-  }, [turns])
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 5000)
+  }, [])
+
+  let requesterText = 'anonymous'
+  // let requestText = 'just talk'
 
   const handleRequesterChange = (event) => {
-    setRequester(event.target.value)
+    // setRequester(event.target.value)
+    requesterText = event.target.value
   }
 
   const handleRequestChange = (event) => {
     setRequest(event.target.value)
+    // requestText = event.target.value
   }
 
   const handleNewTurn = () => {
-    const newTurn = {
-      id: 4,
-      requester,
-      request,
-      isUrgent: false
-    }
-    setFormTurns(formTurns.concat(newTurn))
-    // turns.push(newTurn)
-    // setTurns(turns.concat(newTurn))
-    // setRequester('anonymous')
+    onNewTurn(requesterText, request)
   }
 
+  console.log('TurnForm render')
+
   return (
-    <div>
-      <input
-        value={requester}
-        type='text' placeholder='Requester'
-        onChange={handleRequesterChange}
-      />
-      <input
-        value={request}
-        type='text' placeholder='Request'
-        onChange={handleRequestChange}
-      />
-      <button onClick={handleNewTurn}>Add Turn</button>
-    </div>
+    <>
+      {isLoading
+        ? (<p>Loading...</p>)
+        : (
+          <>
+            <h1>Enter the data of the new turn</h1>
+            <input
+              type='text'
+              onChange={handleRequesterChange}
+            />
+            <input
+              value={request}
+              type='text'
+              onChange={handleRequestChange}
+            />
+            <button onClick={handleNewTurn}>Add Turn</button>
+          </>
+          )}
+    </>
   )
 }
